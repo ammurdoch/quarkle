@@ -1,0 +1,1 @@
+ython manage.py graphql_schema --schema quarkle.schema.schema --out ../../quarkle/data/schema.json
