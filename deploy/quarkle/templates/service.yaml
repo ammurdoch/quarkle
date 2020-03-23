@@ -1,0 +1,84 @@
+{{ $apiContainerPort := $.Values.apiContainerPort }}
+{{ $adminContainerPort := $.Values.adminContainerPort }}
+{{ $uiContainerPort := $.Values.uiContainerPort }}
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.name}}-svc-api
+  labels:
+    app: {{.Values.name}}
+    tier: api
+spec:
+  ports:
+    - port: {{$apiContainerPort}}
+      protocol: TCP
+      targetPort: {{$apiContainerPort}}
+  selector:
+    app: {{.Values.name}}
+    tier: api
+  type: ClusterIP
+---
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.name}}-svc-admin
+  labels:
+    app: {{.Values.name}}
+    tier: admin
+spec:
+  ports:
+    - port: {{$adminContainerPort}}
+      protocol: TCP
+      targetPort: {{$adminContainerPort}}
+  selector:
+    app: {{.Values.name}}
+    tier: admin
+  type: ClusterIP
+---
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.name}}-svc-ui
+  labels:
+    app: {{.Values.name}}
+    tier: ui
+spec:
+  ports:
+    - port: {{$uiContainerPort}}
+      protocol: TCP
+      targetPort: {{$uiContainerPort}}
+  selector:
+    app: {{.Values.name}}
+    tier: ui
+  type: ClusterIP
+---
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.name}}-svc-tor
+  labels:
+    app: {{.Values.name}}
+    tier: tor
+spec:
+  ports:
+    - name: http
+      port: 8118
+      protocol: TCP
+      targetPort: 8118
+    - name: socks
+      port: 9050
+      protocol: TCP
+      targetPort: 9050
+    - name: control
+      port: 9051
+      protocol: TCP
+      targetPort: 9051
+  selector:
+    app: {{.Values.name}}
+    tier: tor
+  type: ClusterIP
+

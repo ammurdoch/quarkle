@@ -1,0 +1,71 @@
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}-api
+  labels:
+    app: {{.Values.name}}
+    tier: api
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
+      tier: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{.Values.name}}
+        tier: api
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: {{.Values.name}}-api
+          image: {{.Values.api.imageName}}-{{.Values.api.imageVersion}}
+          imagePullPolicy: Always
+          command: ["sh", "start_api.sh"]
+          envFrom:
+            - configMapRef:
+                name: {{.Values.name}}-api-config
+          ports:
+            - containerPort: {{.Values.api.containerPort}}
+          volumeMounts:
+            - mountPath: {{.Values.volumeMountPath}}
+              name: {{.Values.name}}-api-volume
+      volumes:
+        - name: {{.Values.name}}-api-volume
+          persistentVolumeClaim:
+            claimName: {{.Values.name}}-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}-ui
+  labels:
+    app: {{.Values.name}}
+    tier: ui
+spec:
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
+      tier: ui
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{.Values.name}}
+        tier: ui
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: {{.Values.name}}-ui
+        image: {{.Values.ui.imageName}}-{{.Values.ui.imageVersion}}
+        imagePullPolicy: Always
+        command: ["pm2-runtime", "start", "npm", "--name", '"next"', "--", "start"]
+        envFrom:
+        - configMapRef:
+            name: {{.Values.name}}-ui-config
+        ports:
+        - containerPort: {{.Values.ui.containerPort}}

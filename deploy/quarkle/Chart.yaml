@@ -1,0 +1,8 @@
+apiVersion: v1
+name: quarkle
+version: 0.0.1
+icon: https://fra1.digitaloceanspaces.com/allowance/ninja-star.png
+maintainers:
+  - name: Aaron Murdoch
+    email: aaron@lale.io
+    url: https://lale.io

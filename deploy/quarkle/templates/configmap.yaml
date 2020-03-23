@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  DEPLOYED: "True"
+  API_URL: {{.Values.api.url}}
+  UI_URL: {{.Values.ui.url}}
+  VERSION: {{.Values.api.imageVersion}}
+  DATA_PATH: {{.Values.volumeMountPath}}
+kind: ConfigMap
+metadata:
+  name: {{.Values.name}}-api-config
+---
+apiVersion: v1
+data:
+  GIT_COMMIT: "{{.Values.gitCommit}}"
+  VERSION: {{.Values.ui.imageVersion}}
+  API_URL: {{.Values.ui.apiUrl}}
+  API_WS_URL: {{.Values.ui.wsUrl}}
+  PORT: "{{.Values.ui.containerPort}}"
+kind: ConfigMap
+metadata:
+  name: {{.Values.name}}-ui-config

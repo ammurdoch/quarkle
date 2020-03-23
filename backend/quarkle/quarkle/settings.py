@@ -84,7 +84,11 @@ WSGI_APPLICATION = "quarkle.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "NAME": (
+            os.path.join(os.getenv("DATA_PATH"), "db.sqlite3")
+            if os.getenv("DEPLOYED")
+            else os.path.join(BASE_DIR, "db.sqlite3")
+        ),
     }
 }
 

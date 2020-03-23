@@ -1,0 +1,15 @@
+name: quarkle
+gitCommit: ""
+ui:
+  imageName: aa512ron/quarkle:ui
+  imageVersion: latest
+  host: quarkle.lale.io
+  apiUrl: "https://quarkle-api.lale.io/graphql/"
+  wsUrl: "wss://quarkle-api.lale.io/graphql/"
+  containerPort: 3000
+  volumeMountPath: "/data"
+api:
+  imageName: aa512ron/quarkle:api
+  imageVersion: latest
+  host: quarkle-api.lale.io
+  containerPort: 8000
