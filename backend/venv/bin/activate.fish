@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/aaron/Code/Quarkle/quarkle-api/venv"
+set -gx VIRTUAL_ENV "/Users/aaron/Code/Quarkle/backend/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

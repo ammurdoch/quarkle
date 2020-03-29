@@ -1,4 +1,4 @@
-#!/Users/aaron/Code/Quarkle/quarkle-api/venv/bin/python3
+#!/Users/aaron/Code/Quarkle/backend/venv/bin/python3
 from django.core import management
 
 if __name__ == "__main__":
