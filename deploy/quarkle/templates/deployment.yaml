@@ -31,7 +31,7 @@ spec:
           ports:
             - containerPort: {{.Values.api.containerPort}}
           volumeMounts:
-            - mountPath: {{.Values.volumeMountPath}}
+            - mountPath: {{.Values.api.volumeMountPath}}
               name: {{.Values.name}}-api-volume
       volumes:
         - name: {{.Values.name}}-api-volume

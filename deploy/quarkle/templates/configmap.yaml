@@ -1,10 +1,10 @@
 apiVersion: v1
 data:
   DEPLOYED: "True"
-  API_URL: {{.Values.api.url}}
-  UI_URL: {{.Values.ui.url}}
+  API_URL: {{.Values.api.host}}
+  UI_URL: {{.Values.ui.host}}
   VERSION: {{.Values.api.imageVersion}}
-  DATA_PATH: {{.Values.volumeMountPath}}
+  DATA_PATH: {{.Values.api.volumeMountPath}}
 kind: ConfigMap
 metadata:
   name: {{.Values.name}}-api-config

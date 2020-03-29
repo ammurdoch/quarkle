@@ -7,9 +7,9 @@ ui:
   apiUrl: "https://quarkle-api.lale.io/graphql/"
   wsUrl: "wss://quarkle-api.lale.io/graphql/"
   containerPort: 3000
-  volumeMountPath: "/data"
 api:
   imageName: aa512ron/quarkle:api
   imageVersion: latest
   host: quarkle-api.lale.io
   containerPort: 8000
+  volumeMountPath: "/data"
